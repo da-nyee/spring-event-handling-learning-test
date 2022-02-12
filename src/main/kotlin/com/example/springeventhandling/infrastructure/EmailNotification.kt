@@ -12,6 +12,6 @@ class EmailNotification : Notification {
         val itemName = order.getItemName()
         val itemPrice = order.getItemPrice()
 
-        return "${userName}에게 이메일을 전송합니다. - 주문 성공 (${itemName}, ${itemPrice}원"
+        return "${userName}에게 이메일을 전송합니다. - 주문 성공 (${itemName}, ${itemPrice}원)"
     }
 }

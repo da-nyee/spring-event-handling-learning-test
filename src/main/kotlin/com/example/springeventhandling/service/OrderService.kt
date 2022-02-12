@@ -14,7 +14,7 @@ class OrderService(
     private val kakaotalkNotification: KakaotalkNotification
 ) {
 
-    fun order(requestDto: OrderRequestDto) {
+    fun order(requestDto: OrderRequestDto): String {
         val orderId = requestDto.orderId
         val user = getUser(requestDto.userId, requestDto.userName)
         val item = getItem(requestDto.itemId, requestDto.itemName, requestDto.itemPrice)
@@ -25,8 +25,10 @@ class OrderService(
             throw IllegalStateException("주문 실패")
         }
 
-        emailNotification.send(order)
-        kakaotalkNotification.send(order)
+        val emailMessage = emailNotification.send(order)
+        val kakaotalkMessage = kakaotalkNotification.send(order)
+
+        return "${emailMessage}\n${kakaotalkMessage}"
     }
 
     private fun getUser(id: Long, name: String): User {
