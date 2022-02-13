@@ -1,4 +1,4 @@
-package com.example.springeventhandling.service.dto
+package com.example.springeventhandling.application.dto
 
 data class OrderRequestDto(
     val orderId: Long,

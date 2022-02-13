@@ -1,11 +1,11 @@
-package com.example.springeventhandling.service
+package com.example.springeventhandling.application
 
 import com.example.springeventhandling.domain.Item
 import com.example.springeventhandling.domain.Order
 import com.example.springeventhandling.domain.User
 import com.example.springeventhandling.infrastructure.EmailNotification
 import com.example.springeventhandling.infrastructure.KakaotalkNotification
-import com.example.springeventhandling.service.dto.OrderRequestDto
+import com.example.springeventhandling.application.dto.OrderRequestDto
 import org.springframework.stereotype.Service
 
 @Service

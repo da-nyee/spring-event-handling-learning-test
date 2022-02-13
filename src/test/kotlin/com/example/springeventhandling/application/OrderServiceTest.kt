@@ -1,7 +1,7 @@
-package com.example.springeventhandling
+package com.example.springeventhandling.application
 
-import com.example.springeventhandling.service.OrderService
-import com.example.springeventhandling.service.dto.OrderRequestDto
+import com.example.springeventhandling.application.OrderService
+import com.example.springeventhandling.application.dto.OrderRequestDto
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
