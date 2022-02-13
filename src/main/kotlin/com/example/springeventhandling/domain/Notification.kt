@@ -1,6 +1,8 @@
 package com.example.springeventhandling.domain
 
+import com.example.springeventhandling.domain.event.OrderEvent
+
 interface Notification {
 
-    fun send(order: Order): String
+    fun send(orderEvent: OrderEvent)
 }

@@ -1,20 +1,19 @@
 package com.example.springeventhandling.application
 
+import com.example.springeventhandling.application.dto.OrderRequestDto
 import com.example.springeventhandling.domain.Item
 import com.example.springeventhandling.domain.Order
 import com.example.springeventhandling.domain.User
-import com.example.springeventhandling.infrastructure.EmailNotification
-import com.example.springeventhandling.infrastructure.KakaotalkNotification
-import com.example.springeventhandling.application.dto.OrderRequestDto
+import com.example.springeventhandling.domain.event.OrderEvent
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 
 @Service
 class OrderService(
-    private val emailNotification: EmailNotification,
-    private val kakaotalkNotification: KakaotalkNotification
+    private val eventPublisher: ApplicationEventPublisher
 ) {
 
-    fun order(requestDto: OrderRequestDto): String {
+    fun order(requestDto: OrderRequestDto) {
         val orderId = requestDto.orderId
         val user = getUser(requestDto.userId, requestDto.userName)
         val item = getItem(requestDto.itemId, requestDto.itemName, requestDto.itemPrice)
@@ -25,10 +24,7 @@ class OrderService(
             throw IllegalStateException("주문 실패")
         }
 
-        val emailMessage = emailNotification.send(order)
-        val kakaotalkMessage = kakaotalkNotification.send(order)
-
-        return "${emailMessage}\n${kakaotalkMessage}"
+        eventPublisher.publishEvent(OrderEvent(order))
     }
 
     private fun getUser(id: Long, name: String): User {

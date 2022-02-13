@@ -1,17 +1,19 @@
 package com.example.springeventhandling.infrastructure
 
 import com.example.springeventhandling.domain.Notification
-import com.example.springeventhandling.domain.Order
+import com.example.springeventhandling.domain.event.OrderEvent
+import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Component
 
 @Component
 class KakaotalkNotification : Notification {
 
-    override fun send(order: Order): String {
-        val userName = order.getUserName()
-        val itemName = order.getItemName()
-        val itemPrice = order.getItemPrice()
+    @EventListener
+    override fun send(orderEvent: OrderEvent) {
+        val userName = orderEvent.getUserName()
+        val itemName = orderEvent.getItemName()
+        val itemPrice = orderEvent.getItemPrice()
 
-        return "${userName}에게 카카오톡을 전송합니다. - 주문 성공 (${itemName}, ${itemPrice}원)"
+        print("${userName}에게 카카오톡을 전송합니다. - 주문 성공 (${itemName}, ${itemPrice}원)\n")
     }
 }
