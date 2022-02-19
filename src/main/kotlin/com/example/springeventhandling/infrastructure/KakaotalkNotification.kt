@@ -12,10 +12,12 @@ class KakaotalkNotification : Notification {
     @Order(1)
     @EventListener(condition = "#orderEvent.kakaoNotification")
     override fun send(orderEvent: OrderEvent) {
-        val userName = orderEvent.getUserName()
-        val itemName = orderEvent.getItemName()
-        val itemPrice = orderEvent.getItemPrice()
+        throw RuntimeException("카카오톡 연동에 문제가 발생했습니다.")
 
-        print("${userName}에게 카카오톡을 전송합니다. - 주문 성공 (${itemName}, ${itemPrice}원)\n")
+//        val userName = orderEvent.getUserName()
+//        val itemName = orderEvent.getItemName()
+//        val itemPrice = orderEvent.getItemPrice()
+//
+//        print("${userName}에게 카카오톡을 전송합니다. - 주문 성공 (${itemName}, ${itemPrice}원)\n")
     }
 }

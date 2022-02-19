@@ -25,6 +25,8 @@ class OrderService(
         }
 
         eventPublisher.publishEvent(OrderEvent(order, emailNotification = false, kakaotalkNotification = true))
+
+        print("정상적으로 주문을 마쳤습니다.\n")
     }
 
     private fun getUser(id: Long, name: String): User {
