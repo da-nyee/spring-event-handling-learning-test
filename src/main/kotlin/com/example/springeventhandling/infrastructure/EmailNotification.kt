@@ -2,15 +2,15 @@ package com.example.springeventhandling.infrastructure
 
 import com.example.springeventhandling.domain.Notification
 import com.example.springeventhandling.domain.event.OrderEvent
-import org.springframework.context.event.EventListener
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
+import org.springframework.transaction.event.TransactionalEventListener
 
 @Component
 class EmailNotification : Notification {
 
     @Order(2)
-    @EventListener(condition = "#orderEvent.emailNotification")
+    @TransactionalEventListener(condition = "#orderEvent.emailNotification")
     override fun send(orderEvent: OrderEvent) {
         val userName = orderEvent.getUserName()
         val itemName = orderEvent.getItemName()

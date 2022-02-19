@@ -7,12 +7,15 @@ import com.example.springeventhandling.domain.User
 import com.example.springeventhandling.domain.event.OrderEvent
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
+@Transactional(readOnly = true)
 @Service
 class OrderService(
     private val eventPublisher: ApplicationEventPublisher
 ) {
 
+    @Transactional
     fun order(requestDto: OrderRequestDto) {
         val orderId = requestDto.orderId
         val user = getUser(requestDto.userId, requestDto.userName)
@@ -24,7 +27,7 @@ class OrderService(
             throw IllegalStateException("주문 실패")
         }
 
-        eventPublisher.publishEvent(OrderEvent(order, emailNotification = false, kakaotalkNotification = true))
+        eventPublisher.publishEvent(OrderEvent(order, emailNotification = true, kakaotalkNotification = true))
 
         print("정상적으로 주문을 마쳤습니다.\n")
     }
