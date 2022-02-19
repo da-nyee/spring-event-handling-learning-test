@@ -12,6 +12,10 @@ class KakaotalkNotification : Notification {
     @Order(1)
     @EventListener
     override fun send(orderEvent: OrderEvent) {
+        if (!orderEvent.isKakaoNotification()) {
+            return
+        }
+
         val userName = orderEvent.getUserName()
         val itemName = orderEvent.getItemName()
         val itemPrice = orderEvent.getItemPrice()

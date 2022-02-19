@@ -24,7 +24,7 @@ class OrderService(
             throw IllegalStateException("주문 실패")
         }
 
-        eventPublisher.publishEvent(OrderEvent(order))
+        eventPublisher.publishEvent(OrderEvent(order, emailNotification = false, kakaotalkNotification = true))
     }
 
     private fun getUser(id: Long, name: String): User {

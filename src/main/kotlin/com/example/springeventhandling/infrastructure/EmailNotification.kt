@@ -12,6 +12,10 @@ class EmailNotification : Notification {
     @Order(2)
     @EventListener
     override fun send(orderEvent: OrderEvent) {
+        if (!orderEvent.isEmailNotification()) {
+            return
+        }
+
         val userName = orderEvent.getUserName()
         val itemName = orderEvent.getItemName()
         val itemPrice = orderEvent.getItemPrice()
